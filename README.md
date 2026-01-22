@@ -1,6 +1,6 @@
-# Business Value Consultant
+# BVF Assistant
 
-An AI-powered web application that helps analyze business documents and articulate value propositions, outcomes, and KPIs using Google's Gemini API.
+A Business Value Framework AI assistant that helps analyze business documents and articulate value propositions, outcomes, and KPIs using Google's Gemini API.
 
 ## Features
 
