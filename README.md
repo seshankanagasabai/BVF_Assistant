@@ -10,7 +10,7 @@ An AI-powered web application that helps analyze business documents and articula
   - 🔍 **Current State & Pain Points** - Identifies challenges with business impact
   - 🚀 **Future State & Outcomes** - Maps solutions to Value Map goals
   - 📈 **Suggested KPIs** - Recommends metrics with measurement methods
-  - 🔀 **Generate Diagram CSV** - Creates Lucidchart-compatible architecture diagrams
+  - 🔀 **Generate Diagram CSV** - Creates Lucidchart-compatible architecture diagrams *(experimental - needs more work)*
 - **Persistent Storage**: API key and reference materials saved to browser localStorage
 
 ## Getting Started
@@ -78,8 +78,8 @@ An AI-powered web application that helps analyze business documents and articula
 - Tip: Export Google Slides as PNG images
 
 **Solution Document** (Proposed solution):
-- Supports: HTML, text, markdown OR PNG/JPG images
-- Tip: Export Google Docs as HTML (File → Download → Web Page)
+- Supports: Markdown, HTML, text OR PNG/JPG images
+- Tip: Export Google Docs as Markdown (File → Download → Markdown (.md))
 
 ### Step 4: Analyze
 
@@ -90,7 +90,7 @@ Use the quick action buttons or type your own questions:
 | Current State & Pain Points | 3-5 bullet points of key challenges |
 | Future State & Outcomes | 3-5 bullets linking Value Map goals to solutions |
 | Suggested KPIs | 3-5 KPIs with targets and measurement methods |
-| Generate Diagram CSV | Lucidchart-compatible CSV for architecture diagrams |
+| Generate Diagram CSV | Lucidchart-compatible CSV *(experimental)* |
 
 ### Importing Diagrams to Lucidchart
 
