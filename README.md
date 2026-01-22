@@ -41,14 +41,6 @@ A Business Value Framework AI assistant that helps analyze business documents an
    npx serve
    ```
 
-   **Option C: VS Code / Cursor**
-   - Install the "Live Server" extension
-   - Right-click `gemini-chat.html` → "Open with Live Server"
-
-   **Option D: Direct file opening** (limited functionality)
-   - Double-click `gemini-chat.html` to open in browser
-   - Note: Some features may not work due to CORS restrictions
-
 3. **Open in browser**
    ```
    http://localhost:8080/AI%20OKR/gemini-chat.html
