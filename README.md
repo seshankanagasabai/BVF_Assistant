@@ -5,13 +5,13 @@ A Business Value Framework AI assistant that helps analyze business documents an
 ## Features
 
 - **Document Analysis**: Upload Value Maps (images or text) and Solution Documents to provide context
-- **Braze Value Cards Reference**: Store constant reference materials with standard metrics and benchmarks
+- **TAM BVF Value Cards**: Pre-loaded reference materials with standard value drivers, metrics, and benchmarks
 - **Quick Actions**: One-click analysis for common business scenarios:
   - 🔍 **Current State & Pain Points** - Identifies challenges with business impact
   - 🚀 **Future State & Outcomes** - Maps solutions to Value Map goals
   - 📈 **Suggested KPIs** - Recommends metrics with measurement methods
   - 🔀 **Generate Diagram CSV** - Creates Lucidchart-compatible architecture diagrams *(experimental - needs more work)*
-- **Persistent Storage**: API key and reference materials saved to browser localStorage
+- **Persistent Storage**: API key saved to browser localStorage
 
 ## Getting Started
 
@@ -48,7 +48,6 @@ A Business Value Framework AI assistant that helps analyze business documents an
 
 4. **Configure the app**
    - Enter your Gemini API key and click "Save Key"
-   - (Optional) Add Braze Value Cards reference content
    - Upload your Value Map and Solution Document
 
 ## Usage Guide
@@ -58,12 +57,7 @@ A Business Value Framework AI assistant that helps analyze business documents an
 2. Paste it in the "API Key" field
 3. Click "Save Key" - it will be stored in your browser
 
-### Step 2: Add Reference Materials (Optional)
-1. Click "Braze Value Cards Reference" to expand
-2. Paste your standard value metrics and benchmarks
-3. Click "Save Reference" - this persists across sessions
-
-### Step 3: Upload Documents
+### Step 2: Upload Documents
 
 **Value Map** (Customer's business goals):
 - Supports: PNG, JPG, JPEG, WebP images OR text/markdown files
@@ -73,7 +67,7 @@ A Business Value Framework AI assistant that helps analyze business documents an
 - Supports: Markdown, HTML, text OR PNG/JPG images
 - Tip: Export Google Docs as Markdown (File → Download → Markdown (.md))
 
-### Step 4: Analyze
+### Step 3: Analyze
 
 Use the quick action buttons or type your own questions:
 
@@ -104,7 +98,8 @@ BVF_Assistant/
 
 - **Frontend**: Vanilla HTML, CSS, JavaScript (no frameworks)
 - **AI Model**: Google Gemini 2.0 Flash
-- **Storage**: Browser localStorage for API key and reference materials
+- **Storage**: Browser localStorage for API key
+- **Reference Data**: TAM BVF Value Cards pre-loaded (4 Value Drivers)
 - **Multimodal**: Supports image analysis for Value Maps and Solution Docs
 
 ## Privacy & Security
