@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Value Consultant</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0a0e17;
+      --bg-secondary: #111827;
+      --bg-tertiary: #1e293b;
+      --accent-cyan: #22d3ee;
+      --accent-violet: #a78bfa;
+      --accent-emerald: #34d399;
+      --text-primary: #f1f5f9;
+      --text-secondary: #94a3b8;
+      --text-muted: #64748b;
+      --border-color: #334155;
+      --glow-cyan: 0 0 30px rgba(34, 211, 238, 0.3);
+      --glow-violet: 0 0 30px rgba(167, 139, 250, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    .bg-pattern {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background: 
+        radial-gradient(ellipse 80% 50% at 50% -20%, rgba(34, 211, 238, 0.15), transparent),
+        radial-gradient(ellipse 60% 40% at 100% 100%, rgba(167, 139, 250, 0.1), transparent),
+        radial-gradient(ellipse 50% 30% at 0% 80%, rgba(52, 211, 153, 0.08), transparent);
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      background-image: 
+        linear-gradient(rgba(34, 211, 238, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(34, 211, 238, 0.03) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black, transparent);
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 24px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+      animation: fadeInDown 0.8s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: var(--glow-cyan);
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: var(--text-secondary);
+      font-size: 15px;
+      margin-top: 8px;
+    }
+
+    /* API Key Section */
+    .api-key-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      animation: fadeIn 0.6s ease-out 0.2s both;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .api-key-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .api-key-label svg {
+      width: 16px;
+      height: 16px;
+      color: var(--accent-emerald);
+    }
+
+    .api-key-input-wrapper {
+      display: flex;
+      gap: 12px;
+    }
+
+    .api-key-input {
+      flex: 1;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 14px 18px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      color: var(--text-primary);
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .api-key-input:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
+    }
+
+    .api-key-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .save-key-btn {
+      background: linear-gradient(135deg, var(--accent-emerald), #10b981);
+      border: none;
+      border-radius: 10px;
+      padding: 14px 24px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--bg-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .save-key-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(52, 211, 153, 0.3);
+    }
+
+    .api-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--text-muted);
+    }
+
+    .status-dot.connected {
+      background: var(--accent-emerald);
+      box-shadow: 0 0 10px var(--accent-emerald);
+    }
+
+    /* Reference Materials Section */
+    .reference-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      margin-bottom: 24px;
+      animation: fadeIn 0.6s ease-out 0.25s both;
+      overflow: hidden;
+    }
+
+    .reference-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .reference-header:hover {
+      background: rgba(34, 211, 238, 0.03);
+    }
+
+    .reference-header h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0;
+    }
+
+    .reference-header h3 svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent-emerald);
+    }
+
+    .reference-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .reference-toggle .chevron {
+      transition: transform 0.3s ease;
+    }
+
+    .reference-section.expanded .reference-toggle .chevron {
+      transform: rotate(180deg);
+    }
+
+    .reference-content {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+    }
+
+    .reference-section.expanded .reference-content {
+      max-height: 600px;
+    }
+
+    .reference-inner {
+      padding: 0 24px 24px;
+    }
+
+    .reference-description {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .reference-textarea {
+      width: 100%;
+      min-height: 200px;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--text-primary);
+      resize: vertical;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .reference-textarea:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
+    }
+
+    .reference-textarea::placeholder {
+      color: var(--text-muted);
+    }
+
+    .reference-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 16px;
+      flex-wrap: wrap;
+    }
+
+    .reference-btn {
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .reference-btn.save {
+      background: linear-gradient(135deg, var(--accent-emerald), #10b981);
+      border: none;
+      color: var(--bg-primary);
+    }
+
+    .reference-btn.save:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(52, 211, 153, 0.3);
+    }
+
+    .reference-btn.clear {
+      background: transparent;
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+    }
+
+    .reference-btn.clear:hover {
+      border-color: #ef4444;
+      color: #ef4444;
+    }
+
+    .reference-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--accent-emerald);
+      margin-left: auto;
+    }
+
+    .reference-status.empty {
+      color: var(--text-muted);
+    }
+
+    /* Document Upload Section */
+    .documents-section {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+      animation: fadeIn 0.6s ease-out 0.3s both;
+    }
+
+    .documents-section h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .documents-section h3 svg {
+      width: 20px;
+      height: 20px;
+      color: var(--accent-violet);
+    }
+
+    .document-uploads {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) {
+      .document-uploads {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .document-upload {
+      background: var(--bg-tertiary);
+      border: 2px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .document-upload:hover {
+      border-color: var(--accent-cyan);
+      background: rgba(34, 211, 238, 0.05);
+    }
+
+    .document-upload.has-file {
+      border-style: solid;
+      border-color: var(--accent-emerald);
+      background: rgba(52, 211, 153, 0.05);
+    }
+
+    .document-upload input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .upload-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      background: var(--bg-secondary);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .document-upload.has-file .upload-icon {
+      background: rgba(52, 211, 153, 0.2);
+    }
+
+    .upload-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 4px;
+    }
+
+    .upload-hint {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .file-name {
+      font-size: 12px;
+      color: var(--accent-emerald);
+      margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      word-break: break-all;
+    }
+
+    .file-preview {
+      margin-top: 12px;
+    }
+
+    .file-preview img {
+      max-width: 100%;
+      max-height: 120px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      object-fit: contain;
+    }
+
+    .file-type-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 2px 6px;
+      border-radius: 4px;
+      margin-left: 6px;
+      background: rgba(167, 139, 250, 0.2);
+      color: var(--accent-violet);
+    }
+
+    .file-type-badge.image {
+      background: rgba(34, 211, 238, 0.2);
+      color: var(--accent-cyan);
+    }
+
+    /* Quick Actions */
+    .quick-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-color);
+      background: rgba(30, 41, 59, 0.3);
+    }
+
+    .quick-action-btn {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 8px 16px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .quick-action-btn:hover:not(:disabled) {
+      background: rgba(34, 211, 238, 0.1);
+      border-color: var(--accent-cyan);
+      color: var(--accent-cyan);
+    }
+
+    .quick-action-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .quick-action-btn .icon {
+      font-size: 14px;
+    }
+
+    /* Context indicator */
+    .context-status {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border-color);
+      flex-wrap: wrap;
+    }
+
+    .context-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: var(--bg-tertiary);
+      padding: 6px 12px;
+      border-radius: 6px;
+    }
+
+    .context-badge.active {
+      color: var(--accent-emerald);
+      background: rgba(52, 211, 153, 0.1);
+    }
+
+    .context-badge .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* Chat Area */
+    .chat-area {
+      flex: 1;
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      animation: fadeIn 0.6s ease-out 0.4s both;
+    }
+
+    .messages {
+      flex: 1;
+      padding: 24px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      min-height: 400px;
+      max-height: 60vh;
+    }
+
+    .messages::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .messages::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    .messages::-webkit-scrollbar-thumb {
+      background: var(--border-color);
+      border-radius: 3px;
+    }
+
+    .message {
+      display: flex;
+      gap: 14px;
+      animation: messageIn 0.4s ease-out;
+    }
+
+    @keyframes messageIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message.user {
+      flex-direction: row-reverse;
+    }
+
+    .message-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .message.user .message-avatar {
+      background: linear-gradient(135deg, var(--accent-violet), #8b5cf6);
+    }
+
+    .message.assistant .message-avatar {
+      background: linear-gradient(135deg, var(--accent-cyan), #06b6d4);
+    }
+
+    .message-content {
+      max-width: 75%;
+      padding: 16px 20px;
+      border-radius: 16px;
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .message.user .message-content {
+      background: linear-gradient(135deg, rgba(167, 139, 250, 0.2), rgba(139, 92, 246, 0.15));
+      border: 1px solid rgba(167, 139, 250, 0.3);
+      border-radius: 16px 16px 4px 16px;
+    }
+
+    .message.assistant .message-content {
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 16px 16px 16px 4px;
+    }
+
+    .message-content p {
+      margin-bottom: 12px;
+    }
+
+    .message-content p:last-child {
+      margin-bottom: 0;
+    }
+
+    .message-content pre {
+      background: var(--bg-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      margin: 12px 0;
+      overflow-x: auto;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+    }
+
+    .message-content code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      background: rgba(34, 211, 238, 0.1);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--accent-cyan);
+    }
+
+    .message-content pre code {
+      background: none;
+      padding: 0;
+      color: var(--text-primary);
+    }
+
+    /* CSV Preview and Download */
+    .csv-preview {
+      margin: 16px 0;
+      max-height: 200px;
+      overflow: auto;
+    }
+
+    .csv-preview pre {
+      margin: 0;
+      font-size: 11px;
+    }
+
+    .download-csv-btn {
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+      border: none;
+      border-radius: 10px;
+      padding: 12px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--bg-primary);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .download-csv-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .csv-instructions {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 12px;
+      padding: 12px;
+      background: var(--bg-primary);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      text-align: center;
+      padding: 40px;
+    }
+
+    .empty-state-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--bg-tertiary);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 36px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border-color);
+    }
+
+    .empty-state h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: 14px;
+      max-width: 300px;
+    }
+
+    /* Typing indicator */
+    .typing-indicator {
+      display: flex;
+      gap: 6px;
+      padding: 8px 0;
+    }
+
+    .typing-indicator span {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      animation: bounce 1.4s ease-in-out infinite;
+    }
+
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes bounce {
+      0%, 60%, 100% {
+        transform: translateY(0);
+      }
+      30% {
+        transform: translateY(-8px);
+      }
+    }
+
+    /* Input Area */
+    .input-area {
+      padding: 20px 24px;
+      border-top: 1px solid var(--border-color);
+      background: rgba(30, 41, 59, 0.5);
+    }
+
+    .input-wrapper {
+      display: flex;
+      gap: 12px;
+      align-items: flex-end;
+    }
+
+    .input-field {
+      flex: 1;
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      padding: 16px 20px;
+      font-family: 'Outfit', sans-serif;
+      font-size: 15px;
+      color: var(--text-primary);
+      outline: none;
+      resize: none;
+      min-height: 56px;
+      max-height: 200px;
+      transition: all 0.3s ease;
+    }
+
+    .input-field:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.1);
+    }
+
+    .input-field::placeholder {
+      color: var(--text-muted);
+    }
+
+    .send-btn {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--accent-cyan), var(--accent-violet));
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+    }
+
+    .send-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: var(--glow-cyan);
+    }
+
+    .send-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .send-btn svg {
+      width: 24px;
+      height: 24px;
+      color: var(--bg-primary);
+    }
+
+    /* Error message */
+    .error-message {
+      background: rgba(239, 68, 68, 0.1);
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      margin: 10px 24px;
+      color: #fca5a5;
+      font-size: 14px;
+      display: none;
+    }
+
+    .error-message.visible {
+      display: block;
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-5px); }
+      40%, 80% { transform: translateX(5px); }
+    }
+
+    /* Responsive */
+    @media (max-width: 640px) {
+      .container {
+        padding: 24px 16px;
+      }
+
+      h1 {
+        font-size: 26px;
+      }
+
+      .api-key-input-wrapper {
+        flex-direction: column;
+      }
+
+      .message-content {
+        max-width: 85%;
+      }
+
+      .messages {
+        padding: 16px;
+        min-height: 300px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-pattern"></div>
+  <div class="grid-overlay"></div>
+  
+  <div class="container">
+    <header>
+      <div class="logo">
+        <div class="logo-icon">📊</div>
+        <h1>Business Value Consultant</h1>
+      </div>
+      <p class="subtitle">Synthesise Braze Value Framework elements using Value Map and Solution Document</p>
+    </header>
+
+    <div class="api-key-section">
+      <label class="api-key-label">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+        </svg>
+        API Key
+      </label>
+      <div class="api-key-input-wrapper">
+        <input type="password" id="apiKey" class="api-key-input" placeholder="Enter your Gemini API key...">
+        <button class="save-key-btn" onclick="saveApiKey()">Save Key</button>
+      </div>
+      <div class="api-status">
+        <span class="status-dot" id="statusDot"></span>
+        <span id="statusText">No API key configured</span>
+      </div>
+    </div>
+
+    <div class="reference-section" id="referenceSection">
+      <div class="reference-header" onclick="toggleReference()">
+        <h3>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+          </svg>
+          Braze Value Cards Reference
+        </h3>
+        <div class="reference-toggle">
+          <span id="referenceStatusIndicator" class="reference-status empty">Not configured</span>
+          <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </div>
+      </div>
+      <div class="reference-content">
+        <div class="reference-inner">
+          <p class="reference-description">
+            Paste your Braze Value Cards content below. This includes example value metrics and will be used as constant reference context for all customer analyses. This data is saved locally in your browser.
+          </p>
+          <textarea 
+            class="reference-textarea" 
+            id="referenceContent"
+            placeholder="Paste your Braze Value Cards content here...
+
+Example format:
+─────────────────────────────────────
+VALUE CARD: Customer Engagement
+- Metric: Push notification open rate
+- Benchmark: 5-15% industry average
+- Target: 20%+ with personalization
+- Measurement: (Opens / Delivered) × 100
+─────────────────────────────────────
+
+Include all value cards with metrics, benchmarks, and measurement methodologies..."
+          ></textarea>
+          <div class="reference-actions">
+            <button class="reference-btn save" onclick="saveReference()">
+              <span>💾</span> Save Reference
+            </button>
+            <button class="reference-btn clear" onclick="clearReference()">
+              <span>🗑️</span> Clear
+            </button>
+            <span id="referenceSaveStatus" class="reference-status empty"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="documents-section">
+      <h3>
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+        Upload Business Documents
+      </h3>
+      <div class="document-uploads">
+        <div class="document-upload" id="valueMapUpload">
+          <input type="file" id="valueMapFile" accept=".txt,.md,.png,.jpg,.jpeg,.webp" onchange="handleFileUpload('valueMap', this)">
+          <div class="upload-icon">🎯</div>
+          <div class="upload-label">Value Map</div>
+          <div class="upload-hint">PNG/JPG image or text file</div>
+          <div class="file-name" id="valueMapFileName"></div>
+          <div class="file-preview" id="valueMapPreview"></div>
+        </div>
+        <div class="document-upload" id="solutionDocUpload">
+          <input type="file" id="solutionDocFile" accept=".txt,.md,.html,.htm,.png,.jpg,.jpeg,.webp" onchange="handleFileUpload('solutionDoc', this)">
+          <div class="upload-icon">📋</div>
+          <div class="upload-label">Solution Document</div>
+          <div class="upload-hint">HTML, text, or image (PNG/JPG)</div>
+          <div class="file-name" id="solutionDocFileName"></div>
+          <div class="file-preview" id="solutionDocPreview"></div>
+        </div>
+      </div>
+      <div class="context-status">
+        <div class="context-badge" id="brazeRefBadge">
+          <span class="dot"></span>
+          <span id="brazeRefBadgeText">Braze Ref: Not loaded</span>
+        </div>
+        <div class="context-badge" id="valueMapStatus">
+          <span class="dot"></span>
+          Value Map: Not loaded
+        </div>
+        <div class="context-badge" id="solutionDocStatus">
+          <span class="dot"></span>
+          Solution Doc: Not loaded
+        </div>
+      </div>
+    </div>
+
+    <div class="chat-area">
+      <div class="quick-actions">
+        <button class="quick-action-btn" onclick="askQuestion('current-state')" id="btnCurrentState" disabled>
+          <span class="icon">🔍</span> Current State & Pain Points
+        </button>
+        <button class="quick-action-btn" onclick="askQuestion('future-state')" id="btnFutureState" disabled>
+          <span class="icon">🚀</span> Future State & Outcomes
+        </button>
+        <button class="quick-action-btn" onclick="askQuestion('kpis')" id="btnKpis" disabled>
+          <span class="icon">📈</span> Suggested KPIs
+        </button>
+        <button class="quick-action-btn" onclick="generateDiagram()" id="btnDiagram" disabled>
+          <span class="icon">🔀</span> Generate Diagram CSV
+        </button>
+        <button class="quick-action-btn" onclick="clearChat()" id="btnClear" style="margin-left: auto;">
+          <span class="icon">🗑️</span> Clear Chat
+        </button>
+      </div>
+      <div class="messages" id="messages">
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state-icon">📊</div>
+          <h3>Ready to analyze</h3>
+          <p>Upload your Value Map and Solution Document above, then use the quick actions or ask your own questions about business outcomes and KPIs.</p>
+        </div>
+      </div>
+      <div class="error-message" id="errorMessage"></div>
+      <div class="input-area">
+        <div class="input-wrapper">
+          <textarea 
+            id="userInput" 
+            class="input-field" 
+            placeholder="Ask about business outcomes, pain points, KPIs..."
+            rows="1"
+            onkeydown="handleKeyDown(event)"
+          ></textarea>
+          <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // State
+    let apiKey = localStorage.getItem('geminiApiKey') || '';
+    let isLoading = false;
+    let conversationHistory = [];
+    let valueMapContent = '';
+    let valueMapImage = null; // { mimeType: string, data: base64 }
+    let solutionDocContent = '';
+    let solutionDocImage = null; // { mimeType: string, data: base64 }
+    let brazeReferenceContent = localStorage.getItem('brazeReferenceContent') || '';
+
+    // System prompt for the business consultant
+    const SYSTEM_PROMPT = `You are a Business Value Consultant AI assistant specializing in Braze customer engagement solutions. Your role is to analyze business documents and help articulate value propositions, outcomes, and KPIs.
+
+You have access to the following context:
+
+1. **BRAZE VALUE CARDS REFERENCE** (if provided): Contains standard Braze value metrics, benchmarks, and measurement methodologies. Use these as reference when recommending KPIs and outcomes.
+
+2. **VALUE MAP** (customer-specific): Contains the customer's business goals, priorities, and strategic objectives. This may be provided as a visual diagram/image - if so, analyze the visual elements, relationships, and any metrics shown.
+
+3. **SOLUTION DOCUMENT** (customer-specific): Outlines the proposed Braze solution, its capabilities, and how it addresses business needs. This may be provided as HTML (from Google Docs), text, or as images (from Google Slides) - analyze all content thoroughly.
+
+Your expertise includes:
+- Identifying current state challenges and pain points from business context
+- Articulating future state vision and desired business outcomes
+- Recommending relevant KPIs with specific measurement methodologies
+- Creating executive-level summaries and value narratives
+- Mapping solution capabilities to business outcomes
+
+When responding:
+- Be specific and actionable in your recommendations
+- Use business-oriented language appropriate for executive audiences
+- Structure your responses clearly with headers and bullet points when appropriate
+- Reference specific details from the provided documents when available
+- Quantify impacts where possible (time savings, cost reduction, efficiency gains)
+- Suggest realistic measurement approaches for KPIs
+
+If documents haven't been uploaded yet, provide guidance on what information would be helpful and offer general frameworks for analysis.`;
+
+    // Quick action prompts
+    const QUICK_PROMPTS = {
+      'current-state': `Based on the Value Map and Solution Document provided, identify the **Current State & Pain Points**.
+
+**FORMAT REQUIREMENTS:**
+- Provide exactly 3-5 bullet points
+- Each bullet should be concise (1-2 sentences max)
+- Focus on the most critical pain points that the solution addresses
+- Quantify impact where possible (time, cost, efficiency)
+
+**Output format:**
+## Current State & Pain Points
+• [Pain point 1 with business impact]
+• [Pain point 2 with business impact]
+• [Pain point 3 with business impact]
+(up to 5 bullets maximum)`,
+
+      'future-state': `Based on the Value Map and Solution Document provided, describe the **Future State & Business Outcomes**.
+
+**CRITICAL REQUIREMENT:** Each bullet MUST explicitly reference a specific goal from the Value Map and show how the solution directly addresses it.
+
+**FORMAT REQUIREMENTS:**
+- Provide exactly 3-5 bullet points
+- Each bullet should be concise (1-2 sentences max)
+- Format: "[Value Map Goal] → [Solution capability] → [Business outcome]"
+- Quantify expected improvements where possible
+
+**Output format:**
+## Future State & Business Outcomes
+• **[Value Map Goal 1]**: [How solution addresses it] → [Expected outcome/metric]
+• **[Value Map Goal 2]**: [How solution addresses it] → [Expected outcome/metric]
+• **[Value Map Goal 3]**: [How solution addresses it] → [Expected outcome/metric]
+(up to 5 bullets maximum)
+
+Make it clear how each solution capability maps directly to the customer's stated business priorities from the Value Map.`,
+
+      'kpis': `Based on the Value Map, Solution Document, and Braze Value Cards reference provided, recommend **Suggested KPIs**.
+
+**FORMAT REQUIREMENTS:**
+- Provide exactly 3-5 KPIs
+- Each KPI should include: metric name, target, and how to measure
+- Reference Braze Value Cards benchmarks where applicable
+- Focus on KPIs that directly measure progress toward Value Map goals
+
+**Output format:**
+## Suggested KPIs
+• **[KPI Name]**: [Target/benchmark] — Measured by [method/data source]
+• **[KPI Name]**: [Target/benchmark] — Measured by [method/data source]
+• **[KPI Name]**: [Target/benchmark] — Measured by [method/data source]
+(up to 5 KPIs maximum)
+
+Select KPIs that are actionable, measurable, and directly tied to the customer's business goals.`
+    };
+
+    // Diagram generation prompt (separate from quick prompts as it needs special handling)
+    const DIAGRAM_PROMPT = `Based on the Solution Document provided, create a CSV file that can be imported into Lucidchart to generate an architecture/flow diagram.
+
+**IMPORTANT:** Output ONLY the CSV content, no explanation or markdown code blocks. Start directly with the header row.
+
+**CSV FORMAT (Lucidchart compatible):**
+Use this exact header structure:
+Id,Name,Shape Type,Text Area 1,Connects To,Line Label
+
+**COLUMN DEFINITIONS:**
+- Id: Unique numeric identifier (1, 2, 3, etc.)
+- Name: Short name for the shape (used as label)
+- Shape Type: One of: Rectangle, Diamond, Oval, Cylinder, Parallelogram, Document
+- Text Area 1: Description or details (can be empty)
+- Connects To: Comma-separated list of Id numbers this shape connects to (arrows pointing TO those shapes)
+- Line Label: Label for the connection line (optional)
+
+**SHAPE TYPE GUIDELINES:**
+- Rectangle: Process steps, services, components
+- Diamond: Decision points
+- Oval: Start/End points
+- Cylinder: Databases, data stores
+- Parallelogram: Input/Output, data flow
+- Document: Documents, reports, exports
+
+**EXAMPLE OUTPUT:**
+Id,Name,Shape Type,Text Area 1,Connects To,Line Label
+1,User,Oval,End user or customer,2,Initiates
+2,Mobile App,Rectangle,Braze SDK integrated,3;4,
+3,Braze Platform,Rectangle,Customer engagement platform,5,Sends data
+4,Event Tracking,Parallelogram,User behavior events,3,
+5,Campaign Engine,Rectangle,Automated messaging,6;7,Triggers
+6,Push Notifications,Document,Mobile push messages,,
+7,Email Channel,Document,Email campaigns,,
+
+**REQUIREMENTS:**
+- Include all major components from the solution document
+- Show data flow and integrations
+- Keep it to 8-15 shapes maximum for clarity
+- Ensure logical flow from left to right or top to bottom
+- Output ONLY the CSV, nothing else`;
+
+    // DOM Elements
+    const messagesContainer = document.getElementById('messages');
+    const emptyState = document.getElementById('emptyState');
+    const userInput = document.getElementById('userInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const apiKeyInput = document.getElementById('apiKey');
+    const statusDot = document.getElementById('statusDot');
+    const statusText = document.getElementById('statusText');
+    const errorMessage = document.getElementById('errorMessage');
+
+    // Initialize
+    function init() {
+      if (apiKey) {
+        apiKeyInput.value = apiKey;
+        updateApiStatus(true);
+      }
+      
+      // Load saved reference content
+      if (brazeReferenceContent) {
+        document.getElementById('referenceContent').value = brazeReferenceContent;
+        updateReferenceStatus(true);
+      }
+      
+      // Auto-resize textarea
+      userInput.addEventListener('input', autoResize);
+      userInput.addEventListener('input', updateSendButton);
+      
+      updateSendButton();
+      updateQuickActionButtons();
+    }
+
+    function autoResize() {
+      userInput.style.height = 'auto';
+      userInput.style.height = Math.min(userInput.scrollHeight, 200) + 'px';
+    }
+
+    function updateSendButton() {
+      const hasText = userInput.value.trim().length > 0;
+      const hasKey = apiKey.length > 0;
+      sendBtn.disabled = !hasText || !hasKey || isLoading;
+    }
+
+    function updateQuickActionButtons() {
+      const hasKey = apiKey.length > 0;
+      const canUse = hasKey && !isLoading;
+      const hasSolutionDoc = solutionDocContent || solutionDocImage;
+      
+      document.getElementById('btnCurrentState').disabled = !canUse;
+      document.getElementById('btnFutureState').disabled = !canUse;
+      document.getElementById('btnKpis').disabled = !canUse;
+      document.getElementById('btnDiagram').disabled = !canUse || !hasSolutionDoc;
+    }
+
+    function handleFileUpload(type, input) {
+      const file = input.files[0];
+      if (!file) return;
+
+      const isImage = file.type.startsWith('image/');
+      const isHtml = file.name.endsWith('.html') || file.name.endsWith('.htm');
+      
+      if (isImage) {
+        // Handle image upload
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const base64Data = e.target.result.split(',')[1]; // Remove data:image/xxx;base64, prefix
+          const imageData = {
+            mimeType: file.type,
+            data: base64Data
+          };
+          
+          if (type === 'valueMap') {
+            valueMapImage = imageData;
+            valueMapContent = ''; // Clear text content if image is uploaded
+            document.getElementById('valueMapUpload').classList.add('has-file');
+            document.getElementById('valueMapFileName').innerHTML = file.name + '<span class="file-type-badge image">IMG</span>';
+            document.getElementById('valueMapPreview').innerHTML = `<img src="${e.target.result}" alt="Value Map Preview">`;
+            document.getElementById('valueMapStatus').classList.add('active');
+            document.getElementById('valueMapStatus').innerHTML = '<span class="dot"></span>Value Map: Image ✓';
+          } else {
+            solutionDocImage = imageData;
+            solutionDocContent = ''; // Clear text content if image is uploaded
+            document.getElementById('solutionDocUpload').classList.add('has-file');
+            document.getElementById('solutionDocFileName').innerHTML = file.name + '<span class="file-type-badge image">IMG</span>';
+            document.getElementById('solutionDocPreview').innerHTML = `<img src="${e.target.result}" alt="Solution Doc Preview">`;
+            document.getElementById('solutionDocStatus').classList.add('active');
+            document.getElementById('solutionDocStatus').innerHTML = '<span class="dot"></span>Solution Doc: Image ✓';
+          }
+          
+          updateQuickActionButtons();
+          showError('');
+        };
+        reader.onerror = function() {
+          showError('Failed to read image. Please try again.');
+        };
+        reader.readAsDataURL(file);
+      } else {
+        // Handle text/HTML file upload
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          let content = e.target.result;
+          let fileTypeBadge = 'TXT';
+          
+          // If HTML, extract text content but keep structure hints
+          if (isHtml) {
+            fileTypeBadge = 'HTML';
+            content = processHtmlContent(content);
+          }
+          
+          if (type === 'valueMap') {
+            valueMapContent = content;
+            valueMapImage = null; // Clear image if text is uploaded
+            document.getElementById('valueMapUpload').classList.add('has-file');
+            document.getElementById('valueMapFileName').innerHTML = file.name + `<span class="file-type-badge">${fileTypeBadge}</span>`;
+            document.getElementById('valueMapPreview').innerHTML = '';
+            document.getElementById('valueMapStatus').classList.add('active');
+            document.getElementById('valueMapStatus').innerHTML = '<span class="dot"></span>Value Map: Loaded ✓';
+          } else {
+            solutionDocContent = content;
+            solutionDocImage = null; // Clear image if text is uploaded
+            document.getElementById('solutionDocUpload').classList.add('has-file');
+            document.getElementById('solutionDocFileName').innerHTML = file.name + `<span class="file-type-badge">${fileTypeBadge}</span>`;
+            document.getElementById('solutionDocPreview').innerHTML = '';
+            document.getElementById('solutionDocStatus').classList.add('active');
+            document.getElementById('solutionDocStatus').innerHTML = '<span class="dot"></span>Solution Doc: Loaded ✓';
+          }
+          
+          updateQuickActionButtons();
+          showError('');
+        };
+        
+        reader.onerror = function() {
+          showError('Failed to read file. Please try again.');
+        };
+        
+        reader.readAsText(file);
+      }
+    }
+
+    // Process HTML content to extract readable text while preserving structure
+    function processHtmlContent(html) {
+      // Create a temporary DOM element to parse HTML
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(html, 'text/html');
+      
+      // Remove script and style elements
+      doc.querySelectorAll('script, style, meta, link').forEach(el => el.remove());
+      
+      // Get the body content
+      const body = doc.body || doc.documentElement;
+      
+      // Process the content to preserve structure
+      let result = '';
+      
+      function processNode(node, depth = 0) {
+        if (node.nodeType === Node.TEXT_NODE) {
+          const text = node.textContent.trim();
+          if (text) result += text + ' ';
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          const tag = node.tagName.toLowerCase();
+          
+          // Add structure markers
+          if (['h1', 'h2', 'h3', 'h4', 'h5', 'h6'].includes(tag)) {
+            result += '\n\n## ' + node.textContent.trim() + '\n\n';
+            return;
+          }
+          if (tag === 'p') {
+            result += '\n';
+          }
+          if (tag === 'li') {
+            result += '\n• ';
+          }
+          if (tag === 'br') {
+            result += '\n';
+          }
+          if (['div', 'section', 'article'].includes(tag)) {
+            result += '\n';
+          }
+          
+          // Process children
+          node.childNodes.forEach(child => processNode(child, depth + 1));
+          
+          if (['p', 'div', 'section', 'article', 'tr'].includes(tag)) {
+            result += '\n';
+          }
+        }
+      }
+      
+      processNode(body);
+      
+      // Clean up excessive whitespace
+      result = result
+        .replace(/\n{3,}/g, '\n\n')
+        .replace(/[ \t]+/g, ' ')
+        .trim();
+      
+      return result;
+    }
+
+    function askQuestion(type) {
+      const prompt = QUICK_PROMPTS[type];
+      if (prompt) {
+        userInput.value = prompt;
+        autoResize();
+        sendMessage();
+      }
+    }
+
+    function clearChat() {
+      conversationHistory = [];
+      messagesContainer.innerHTML = `
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state-icon">📊</div>
+          <h3>Ready to analyze</h3>
+          <p>Upload your Value Map and Solution Document above, then use the quick actions or ask your own questions about business outcomes and KPIs.</p>
+        </div>
+      `;
+      showError('');
+    }
+
+    // Generate architecture diagram CSV
+    async function generateDiagram() {
+      if (!apiKey || isLoading) return;
+      if (!solutionDocContent && !solutionDocImage) {
+        showError('Please upload a Solution Document first to generate a diagram.');
+        return;
+      }
+
+      // Hide empty state
+      emptyState.style.display = 'none';
+      
+      // Add user message
+      addMessage('Generate an architecture/flow diagram CSV from the Solution Document', 'user');
+      
+      // Show typing indicator
+      isLoading = true;
+      updateSendButton();
+      updateQuickActionButtons();
+      addTypingIndicator();
+
+      try {
+        // Build the request with solution doc context
+        let messageParts = [];
+        let contextText = DIAGRAM_PROMPT;
+        
+        if (solutionDocContent) {
+          contextText += `\n\n=== SOLUTION DOCUMENT ===\n${solutionDocContent}\n=== END SOLUTION DOCUMENT ===`;
+        }
+        
+        messageParts.push({ text: contextText });
+        
+        // Add solution doc image if present
+        if (solutionDocImage) {
+          messageParts.push({
+            inline_data: {
+              mime_type: solutionDocImage.mimeType,
+              data: solutionDocImage.data
+            }
+          });
+          messageParts.push({ text: '\n\n[Above is the Solution Document image - analyze the architecture, components, and flow shown to create the CSV diagram.]' });
+        }
+
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: [{
+              role: 'user',
+              parts: messageParts
+            }],
+            generationConfig: {
+              temperature: 0.3,
+              maxOutputTokens: 2048
+            }
+          })
+        });
+
+        removeTypingIndicator();
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error?.message || `API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        if (!responseText) {
+          throw new Error('No response generated');
+        }
+
+        // Extract CSV content (remove any markdown code blocks if present)
+        let csvContent = responseText
+          .replace(/```csv\n?/gi, '')
+          .replace(/```\n?/g, '')
+          .trim();
+
+        // Display the result with a download button
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message assistant';
+        messageDiv.innerHTML = `
+          <div class="message-avatar">📊</div>
+          <div class="message-content">
+            <p><strong>Architecture Diagram CSV Generated!</strong></p>
+            <p>The CSV is ready for import into Lucidchart. Click the button below to download.</p>
+            <div class="csv-preview">
+              <pre><code>${escapeHtml(csvContent)}</code></pre>
+            </div>
+            <button class="download-csv-btn" onclick="downloadCSV(\`${escapeForJs(csvContent)}\`, 'architecture-diagram.csv')">
+              📥 Download CSV for Lucidchart
+            </button>
+            <p class="csv-instructions">
+              <strong>To import into Lucidchart:</strong><br>
+              1. Open Lucidchart → File → Import Data<br>
+              2. Select "CSV" and upload the downloaded file<br>
+              3. Map the columns and generate your diagram
+            </p>
+          </div>
+        `;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+      } catch (error) {
+        removeTypingIndicator();
+        console.error('Error:', error);
+        showError(error.message);
+      } finally {
+        isLoading = false;
+        updateSendButton();
+        updateQuickActionButtons();
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function escapeForJs(text) {
+      return text.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$/g, '\\$');
+    }
+
+    function downloadCSV(content, filename) {
+      const blob = new Blob([content], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      link.click();
+      URL.revokeObjectURL(link.href);
+    }
+
+    // Reference management functions
+    function toggleReference() {
+      const section = document.getElementById('referenceSection');
+      section.classList.toggle('expanded');
+    }
+
+    function saveReference() {
+      const content = document.getElementById('referenceContent').value.trim();
+      brazeReferenceContent = content;
+      localStorage.setItem('brazeReferenceContent', content);
+      updateReferenceStatus(content.length > 0);
+      
+      // Show save confirmation
+      const statusEl = document.getElementById('referenceSaveStatus');
+      if (content) {
+        statusEl.textContent = '✓ Saved!';
+        statusEl.classList.remove('empty');
+      } else {
+        statusEl.textContent = 'Cleared';
+        statusEl.classList.add('empty');
+      }
+      
+      setTimeout(() => {
+        statusEl.textContent = '';
+      }, 2000);
+    }
+
+    function clearReference() {
+      document.getElementById('referenceContent').value = '';
+      brazeReferenceContent = '';
+      localStorage.removeItem('brazeReferenceContent');
+      updateReferenceStatus(false);
+      
+      const statusEl = document.getElementById('referenceSaveStatus');
+      statusEl.textContent = 'Cleared';
+      statusEl.classList.add('empty');
+      setTimeout(() => {
+        statusEl.textContent = '';
+      }, 2000);
+    }
+
+    function updateReferenceStatus(hasContent) {
+      const indicator = document.getElementById('referenceStatusIndicator');
+      const badge = document.getElementById('brazeRefBadge');
+      const badgeText = document.getElementById('brazeRefBadgeText');
+      
+      if (hasContent) {
+        const wordCount = brazeReferenceContent.split(/\s+/).length;
+        indicator.textContent = `✓ ${wordCount} words loaded`;
+        indicator.classList.remove('empty');
+        badge.classList.add('active');
+        badgeText.textContent = 'Braze Ref: Loaded ✓';
+      } else {
+        indicator.textContent = 'Not configured';
+        indicator.classList.add('empty');
+        badge.classList.remove('active');
+        badgeText.textContent = 'Braze Ref: Not loaded';
+      }
+    }
+
+    function buildContextMessage() {
+      let context = '';
+      
+      // Add Braze reference first (constant context)
+      if (brazeReferenceContent) {
+        context += `\n\n=== BRAZE VALUE CARDS REFERENCE ===\n${brazeReferenceContent}\n=== END BRAZE REFERENCE ===`;
+      }
+      
+      // Add customer-specific documents
+      if (valueMapContent) {
+        context += `\n\n=== VALUE MAP DOCUMENT ===\n${valueMapContent}\n=== END VALUE MAP ===`;
+      }
+      
+      if (solutionDocContent) {
+        context += `\n\n=== SOLUTION DOCUMENT ===\n${solutionDocContent}\n=== END SOLUTION DOCUMENT ===`;
+      }
+      
+      return context;
+    }
+
+    function saveApiKey() {
+      const key = apiKeyInput.value.trim();
+      if (key) {
+        apiKey = key;
+        localStorage.setItem('geminiApiKey', key);
+        updateApiStatus(true);
+        updateSendButton();
+        updateQuickActionButtons();
+        showError(''); // Clear any errors
+      }
+    }
+
+    function updateApiStatus(connected) {
+      if (connected) {
+        statusDot.classList.add('connected');
+        statusText.textContent = 'API key configured';
+      } else {
+        statusDot.classList.remove('connected');
+        statusText.textContent = 'No API key configured';
+      }
+    }
+
+    function handleKeyDown(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        if (!sendBtn.disabled) {
+          sendMessage();
+        }
+      }
+    }
+
+    function showError(message) {
+      if (message) {
+        errorMessage.textContent = message;
+        errorMessage.classList.add('visible');
+      } else {
+        errorMessage.classList.remove('visible');
+      }
+    }
+
+    function addMessage(content, role) {
+      // Hide empty state
+      emptyState.style.display = 'none';
+
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${role}`;
+      
+      const avatar = role === 'user' ? '👤' : '📊';
+      
+      // Format content (basic markdown-like formatting)
+      let formattedContent = formatContent(content);
+      
+      messageDiv.innerHTML = `
+        <div class="message-avatar">${avatar}</div>
+        <div class="message-content">${formattedContent}</div>
+      `;
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      
+      return messageDiv;
+    }
+
+    function formatContent(text) {
+      // Escape HTML
+      text = text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+      
+      // Code blocks
+      text = text.replace(/```(\w*)\n?([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+      
+      // Inline code
+      text = text.replace(/`([^`]+)`/g, '<code>$1</code>');
+      
+      // Bold
+      text = text.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+      
+      // Italic
+      text = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+      
+      // Line breaks to paragraphs
+      text = text.split('\n\n').map(p => `<p>${p}</p>`).join('');
+      text = text.replace(/\n/g, '<br>');
+      
+      return text;
+    }
+
+    function addTypingIndicator() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'message assistant';
+      typingDiv.id = 'typingIndicator';
+      typingDiv.innerHTML = `
+        <div class="message-avatar">📊</div>
+        <div class="message-content">
+          <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      `;
+      messagesContainer.appendChild(typingDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function removeTypingIndicator() {
+      const indicator = document.getElementById('typingIndicator');
+      if (indicator) {
+        indicator.remove();
+      }
+    }
+
+    async function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message || !apiKey || isLoading) return;
+
+      // Clear input
+      userInput.value = '';
+      autoResize();
+      updateSendButton();
+      showError('');
+
+      // Add user message (show truncated version in UI for long prompts)
+      const displayMessage = message.length > 500 
+        ? message.substring(0, 200) + '... [click to expand]' 
+        : message;
+      addMessage(message, 'user');
+      
+      // Build the full message with context for first message
+      let fullMessage = message;
+      let messageParts = [];
+      
+      if (conversationHistory.length === 0) {
+        // First message - include system prompt and documents
+        const context = buildContextMessage();
+        fullMessage = SYSTEM_PROMPT + context + '\n\n---\n\nUser Request: ' + message;
+        
+        // Add text part
+        messageParts.push({ text: fullMessage });
+        
+        // Add Value Map image if present
+        if (valueMapImage) {
+          messageParts.push({
+            inline_data: {
+              mime_type: valueMapImage.mimeType,
+              data: valueMapImage.data
+            }
+          });
+          messageParts.push({ text: '\n\n[Above is the Value Map image - please analyze the visual content, goals, priorities, and any metrics shown in this diagram.]' });
+        }
+        
+        // Add Solution Document image if present
+        if (solutionDocImage) {
+          messageParts.push({
+            inline_data: {
+              mime_type: solutionDocImage.mimeType,
+              data: solutionDocImage.data
+            }
+          });
+          messageParts.push({ text: '\n\n[Above is the Solution Document image - please analyze the visual content, solution components, features, and capabilities shown in this slide/document.]' });
+        }
+      } else {
+        messageParts.push({ text: message });
+      }
+      
+      // Add to history
+      conversationHistory.push({
+        role: 'user',
+        parts: messageParts
+      });
+
+      // Show typing indicator
+      isLoading = true;
+      updateSendButton();
+      updateQuickActionButtons();
+      addTypingIndicator();
+
+      try {
+        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            contents: conversationHistory,
+            generationConfig: {
+              temperature: 0.7,
+              maxOutputTokens: 4096
+            }
+          })
+        });
+
+        removeTypingIndicator();
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error?.message || `API error: ${response.status}`);
+        }
+
+        const data = await response.json();
+        
+        // Extract response text
+        const responseText = data.candidates?.[0]?.content?.parts?.[0]?.text;
+        
+        if (!responseText) {
+          throw new Error('No response generated');
+        }
+
+        // Add assistant message
+        addMessage(responseText, 'assistant');
+        
+        // Add to history
+        conversationHistory.push({
+          role: 'model',
+          parts: [{ text: responseText }]
+        });
+
+      } catch (error) {
+        removeTypingIndicator();
+        console.error('Error:', error);
+        
+        let errorMsg = error.message;
+        if (errorMsg.includes('API_KEY_INVALID') || errorMsg.includes('401')) {
+          errorMsg = 'Invalid API key. Please check your Gemini API key and try again.';
+        } else if (errorMsg.includes('QUOTA_EXCEEDED')) {
+          errorMsg = 'API quota exceeded. Please try again later.';
+        } else if (errorMsg.includes('Failed to fetch')) {
+          errorMsg = 'Network error. Please check your internet connection.';
+        }
+        
+        showError(errorMsg);
+        
+        // Remove the last user message from history since it failed
+        conversationHistory.pop();
+      } finally {
+        isLoading = false;
+        updateSendButton();
+        updateQuickActionButtons();
+      }
+    }
+
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>
+
