@@ -19,6 +19,7 @@ An AI-powered web application that helps analyze business documents and articula
 
 - A modern web browser (Chrome, Firefox, Safari, Edge)
 - A [Google Gemini API key](https://aistudio.google.com/app/apikey)
+- A local web server (see options below)
 
 ### Quick Start
 
@@ -28,17 +29,25 @@ An AI-powered web application that helps analyze business documents and articula
    cd BVF_Assistant
    ```
 
-2. **Start a local server**
+2. **Start a local server** (choose one option)
+
+   **Option A: Python** (pre-installed on Mac/Linux)
    ```bash
-   # Using Python 3
    python3 -m http.server 8080
-   
-   # Or using Python 2
-   python -m SimpleHTTPServer 8080
-   
-   # Or using Node.js (if installed)
+   ```
+
+   **Option B: Node.js** (if installed)
+   ```bash
    npx serve
    ```
+
+   **Option C: VS Code / Cursor**
+   - Install the "Live Server" extension
+   - Right-click `gemini-chat.html` → "Open with Live Server"
+
+   **Option D: Direct file opening** (limited functionality)
+   - Double-click `gemini-chat.html` to open in browser
+   - Note: Some features may not work due to CORS restrictions
 
 3. **Open in browser**
    ```
