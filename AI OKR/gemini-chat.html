@@ -973,10 +973,10 @@
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
           </svg>
-          Braze Value Cards Reference
+          TAM BVF Value Cards
         </h3>
         <div class="reference-toggle">
-          <span id="referenceStatusIndicator" class="reference-status empty">Not configured</span>
+          <span id="referenceStatusIndicator" class="reference-status">✓ Pre-loaded</span>
           <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M6 9l6 6 6-6"/>
           </svg>
@@ -985,33 +985,14 @@
       <div class="reference-content">
         <div class="reference-inner">
           <p class="reference-description">
-            Paste your Braze Value Cards content below. This includes example value metrics and will be used as constant reference context for all customer analyses. This data is saved locally in your browser.
+            The TAM BVF Value Cards are pre-loaded and used as constant reference context for all analyses. Click to expand and view the content. This includes the four Value Drivers: Maximize Revenue & Profit, Reduce Business Risk, Reduce Cost and Eliminate Complexity, and Build Brand Equity.
           </p>
           <textarea 
             class="reference-textarea" 
             id="referenceContent"
-            placeholder="Paste your Braze Value Cards content here...
-
-Example format:
-─────────────────────────────────────
-VALUE CARD: Customer Engagement
-- Metric: Push notification open rate
-- Benchmark: 5-15% industry average
-- Target: 20%+ with personalization
-- Measurement: (Opens / Delivered) × 100
-─────────────────────────────────────
-
-Include all value cards with metrics, benchmarks, and measurement methodologies..."
+            readonly
+            style="background: var(--bg-primary); cursor: default;"
           ></textarea>
-          <div class="reference-actions">
-            <button class="reference-btn save" onclick="saveReference()">
-              <span>💾</span> Save Reference
-            </button>
-            <button class="reference-btn clear" onclick="clearReference()">
-              <span>🗑️</span> Clear
-            </button>
-            <span id="referenceSaveStatus" class="reference-status empty"></span>
-          </div>
         </div>
       </div>
     </div>
@@ -1111,7 +1092,60 @@ Include all value cards with metrics, benchmarks, and measurement methodologies.
     let valueMapImage = null; // { mimeType: string, data: base64 }
     let solutionDocContent = '';
     let solutionDocImage = null; // { mimeType: string, data: base64 }
-    let brazeReferenceContent = localStorage.getItem('brazeReferenceContent') || '';
+    // TAM BVF Value Cards - Pre-loaded reference content
+    const TAM_BVF_VALUE_CARDS = `**How To Use These Cards:** These TAM Value Cards are intended to support conversations that you have with customers about the business value of TAM services. You may find them to be useful in a couple of key ways:
+
+1. They can give you some direction about the kind of business value a customer may want to unlock through a technical project, to support your discovery questions.
+2. They can give you some direction about how to articulate the business value of project work that you know is connected to a particular Value Driver at a high-level.
+
+These Value Cards are **NOT** intended to encompass every way in which to potentially position or interpret the business value of a technical project. They are intentionally directional, and you are encouraged to add to them as you identify new, effective ways of positioning TAM value.
+
+**Value Driver: Maximize Revenue & Profit**
+
+| Component | Responses |
+| :---- | :---- |
+| **Before Scenarios** | Fragmented customer experiences across channels (email, SMS / messaging, mobile, web, TV, paid social) Process to deploy and optimize campaigns is complex and requires too many people Lack of dedicated technical expertise to execute complex use cases Inability to articulate technical considerations of use cases Lack of confidence, and knowledge that innovative ideas will lead to real growth. |
+| **Negative Consequences** | Inability to deliver the intended customer experience; memorable for the wrong reasons affecting retention rate (x%) and high CAC≥, ($). Wasted money $), time, and resources on ineffective marketing strategies and execution Higher churn, lower conversions and lost revenue from less effective campaigns or programs Lack of innovation losing market share to competitors |
+| **After Scenarios** | Able to deliver a more cohesive customer experience at scale Operate with agility and insight in a culture of experimentation (new channels, approaches, strategies) Build reputation for creative and innovative customer engagement campaigns Simplified processes that will allow the team to be self sufficient More educated team on impactful customer engagement strategies. Operational excellence at Scale. |
+| **Positive Business Outcomes** | Increased customer health metrics (CSAT, NPS, "stickiness", frequency of engagement) Incremental profit from improved conversion rates, purchase frequency, AOV/ARPU, reduced churn, CLTV Increased return on existing tech stack Increased company valuation and market cap Improved team efficiency costs. |
+| **Required capabilities** | Dedicated resource to understand technical complexities and provide education and guidance to execute complex use cases. Tightly integrated capabilities that inspire creativity, improve productivity, and optimize results Strategies, Systems and Solutions that provide greater autonomy and self-sufficiency for marketers and engineers |
+| **Metrics** | Number of Braze channels support, Increased ROI from MarTech stack, Campaign engagement (impressions, sends, clicks…etc.), Number of new use cases live supported by TAM solution, Number of customers targeted by TAM-enabled use cases, Uplift in customer retention figures, Uplift in incremental revenue driven by TAM-enabled use cases, Increase in brand health metrics, Increase in overall customer lifetime value |
+
+**Value Driver: Reduce Business Risk Today & As We Scale**
+
+| Component | Responses |
+| :---- | :---- |
+| **Before Scenarios** | Technical Stack containing multiple tools, with complexities and functional interdependencies between tools. Third-party reliance from our partners and vendors to adjust or evolve technical capabilities of tools Inconsistencies across Business Unit landscapes wrt to Marketing & Tech capabilities |
+| **Negative Consequences** | Reduced pace of MarTech capability evolution due to resourcing & expertise requirements Reliance on partners and vendors, which is added cost and more technical debt, and high-barrier to martech evolution Lack of environment, speed and capabilities to innovate and achieve advanced use cases Inability to scale and adapt martech strategies across all regions at the same time and pace Inability for technical infrastructure to adapt quickly to meet regulatory requirements or changing business landscape Downtime due to poor solution design or interdependencies between multiple systems |
+| **After Scenarios** | Technical architecture has been streamlined, where fewer platforms each manage a higher quantity of processes Greater autonomy, self-sufficiency and lowered dependence on partners and third-party expertises to innovate Ability to build advanced solutions while alleviating complexities of solutions Being able to adapt faster to changing business needs Being able to achieve parity in capability improvement and greater speed of capability rollout across all regions |
+| **Positive Business Outcomes** | Higher scalability that accounts for future growth in customers and messaging volume Faster rate of MarTech Capability evolution Ability to execute Advanced Use Cases with greater ease Faster reaction time & greater scalability against growing & changing business needs |
+| **Required capabilities** | Technical Guidance around architecture consolidation & simplification Systems, Expertise & environment that help catalyze innovation & amplify MarTech use cases Tailored Solutions and support that reduces Technical Debt incurred by all teams Propagation of knowledge, solutions and expertise across entire organization |
+| **Metrics** | Reduced number of sprints required to integrate Braze functionality, Higher volume of TAM solutions activated across additional BUs, Reduction in cost of maintaining technical architecture, Reduction in time achieving parity in integrations across different BUs, Reduction in complex workarounds to activate customer data, Reduction in the number of dependencies between different technical systems and services, Reduced time releasing new integrations or updates, Reduction in messaging downtime |
+
+**Value Driver: Reduce Cost and Eliminate Complexity**
+
+| Component | Responses |
+| :---- | :---- |
+| **Before Scenarios** | Multiple, poorly managed data sources or ingestion pipelines Complex user profile ID handling (e.g. customer supports multiple brands each with their own brand-specific profile IDs) High volume of vendor platforms in the tech stack Lots of siloed microservices each handling separate messaging tasks Minimal or absent governance or documentation of user data utilization Minimal or absent documentation of technical architecture |
+| **Negative Consequences** | Time wasted auditing data utilization and redefining data definitions, reducing time available for innovation Reduced capacity to scale activity quickly and securely More time and careful planning required to roll out new use cases Additional services required to support onboarding new platforms, driving up costs Unable to launch personalized customer experiences, due to ineffective user targeting and / or broken customer ID resolution. Data isn't available in real-time for reactive cross-channel messaging |
+| **After Scenarios** | Technical architecture supports personalized real-time and scheduled customer data ingestion Customer data that is available to message platforms is subject to governance rules Comprehensive data dictionary has been created and provides respected formatting rules for data planning exercises All user profile IDs are resolved such that the customer is able to maintain a single master profile for each user Technical architecture has been streamlined, where fewer platforms each manage a higher quantity of processes |
+| **Positive Business Outcomes** | Reduction in maintenance costs associated with servicing and supporting complex architecture Reduction in vendor costs by removing platforms that aren't driving value Reduction in time to rollout new personalized cross-channel use cases Reduction in unused data point utilization Higher ROI driven by holistic cost reductions and a higher volume of value-generating messaging Reduction in time to rollout new integrations or enable ingestion from new, valuable data sources. |
+| **Required capabilities** | Enablement for data dictionary best practices and governance Technical solutions to advanced use cases can be rolled out without adding complexity to the customer's technical architecture Technical expertise is available to provide guidance during implementation sprints, to avoid costly errors or the accumulation of technical debt that will add to complexity or cost Propagation of knowledge, solutions and expertise across entire organization to support global architecture uniformity |
+| **Metrics** | Reduction in cost of maintaining technical architecture, Reduction in time achieving parity in integrations across different BUs, Reduction in complex workarounds to activate customer data, Reduction in the number of dependencies between different technical systems and services, Reduction in number of technical support tickets logged, Increase in number of campaigns and canvases that leverage real-time data, Increase in number of technical projects planned and executed, Reduction in time required to roll out new use cases that leverage customer data, Reduction in messaging downtime, Increased ROI from MarTech stack |
+
+**Value Driver: Build Brand Equity with Every Interaction**
+
+| Component | Responses |
+| :---- | :---- |
+| **Before Scenarios** | Lack the resourcing or technical expertise to integrate all channels to power multi-touchpoint message journeys Lots of siloed microservices each handling separate messaging tasks Disconnected data sources that complicate or block the ability to enrich messaging profiles with valuable customer data Inability to orchestrate sophisticated user segmentation Manual, slow process for testing, experimentation, prediction, and optimization Slow and / or complex data ingestion processes that prevent real-time message triggering |
+| **Negative Consequences** | Unable to launch personalized customer experiences, due to ineffective user targeting and / or absence of relevant data Not able to orchestrate cross-channel messaging experiences from a single platform Unable to maintain a single, complete view of the customer and their engagement Unable to rapidly roll out innovative new engagement strategies quickly Loss of revenue due to incomplete or disconnected customer experiences |
+| **After Scenarios** | All message channels can be or have been integrated All messages are orchestrated from a single platform 360 customer data can be activated at point of message delivery for personalisation and segmentation Platform capabilities support a culture of testing and learning, quickly Data ingestion processes support real-time message triggering |
+| **Positive Business Outcomes** | Reduction in time to rollout new personalized cross-channel use cases Higher revenue driven by multi-channel customer engagement strategies Increased brand health metrics Increased message engagement stats and conversion rates Incremental profit from improved conversion rates, purchase frequency, AOV/ARPU, reduced churn, CLTV Higher customer loyalty and retention metrics |
+| **Required capabilities** | Technical expertise to provide solution design and implementation guidance to roll out creative ideas faster and more easily Solutions for advanced use cases possess robust analytics to enable thorough performance tracking Solutions can appropriately scale with the customer's growing user base Customers have access to technical enablement that supports more autonomous solution implementation |
+| **Metrics** | Number of Braze channels support, Campaign engagement (impressions, sends, clicks…etc.), Number of new use cases live supported by TAM solution, Number of customers targeted by TAM-enabled use cases, Uplift in customer retention figures, Uplift in incremental revenue driven by TAM-enabled use cases, Increase in brand health metrics, Increase in overall customer lifetime value, Number of campaigns / canvases live leveraging real-time personalisation |`;
+
+    // Use the constant as default reference content
+    let brazeReferenceContent = TAM_BVF_VALUE_CARDS;
 
     // System prompt for the business consultant
     const SYSTEM_PROMPT = `You are a Business Value Consultant AI assistant specializing in Braze customer engagement solutions. Your role is to analyze business documents and help articulate value propositions, outcomes, and KPIs.
@@ -1254,11 +1288,9 @@ Id,Name,Shape Type,Text Area 1,Connects To,Line Label
         updateApiStatus(true);
       }
       
-      // Load saved reference content
-      if (brazeReferenceContent) {
-        document.getElementById('referenceContent').value = brazeReferenceContent;
-        updateReferenceStatus(true);
-      }
+      // Load pre-loaded TAM BVF Value Cards
+      document.getElementById('referenceContent').value = brazeReferenceContent;
+      updateReferenceStatus(true);
       
       // Auto-resize textarea
       userInput.addEventListener('input', autoResize);
@@ -1596,58 +1628,17 @@ Id,Name,Shape Type,Text Area 1,Connects To,Line Label
       section.classList.toggle('expanded');
     }
 
-    function saveReference() {
-      const content = document.getElementById('referenceContent').value.trim();
-      brazeReferenceContent = content;
-      localStorage.setItem('brazeReferenceContent', content);
-      updateReferenceStatus(content.length > 0);
-      
-      // Show save confirmation
-      const statusEl = document.getElementById('referenceSaveStatus');
-      if (content) {
-        statusEl.textContent = '✓ Saved!';
-        statusEl.classList.remove('empty');
-      } else {
-        statusEl.textContent = 'Cleared';
-        statusEl.classList.add('empty');
-      }
-      
-      setTimeout(() => {
-        statusEl.textContent = '';
-      }, 2000);
-    }
-
-    function clearReference() {
-      document.getElementById('referenceContent').value = '';
-      brazeReferenceContent = '';
-      localStorage.removeItem('brazeReferenceContent');
-      updateReferenceStatus(false);
-      
-      const statusEl = document.getElementById('referenceSaveStatus');
-      statusEl.textContent = 'Cleared';
-      statusEl.classList.add('empty');
-      setTimeout(() => {
-        statusEl.textContent = '';
-      }, 2000);
-    }
-
     function updateReferenceStatus(hasContent) {
       const indicator = document.getElementById('referenceStatusIndicator');
       const badge = document.getElementById('brazeRefBadge');
       const badgeText = document.getElementById('brazeRefBadgeText');
       
-      if (hasContent) {
-        const wordCount = brazeReferenceContent.split(/\s+/).length;
-        indicator.textContent = `✓ ${wordCount} words loaded`;
-        indicator.classList.remove('empty');
-        badge.classList.add('active');
-        badgeText.textContent = 'Braze Ref: Loaded ✓';
-      } else {
-        indicator.textContent = 'Not configured';
-        indicator.classList.add('empty');
-        badge.classList.remove('active');
-        badgeText.textContent = 'Braze Ref: Not loaded';
-      }
+      // TAM BVF Value Cards are always pre-loaded
+      const wordCount = brazeReferenceContent.split(/\s+/).length;
+      indicator.textContent = `✓ Pre-loaded (${wordCount} words)`;
+      indicator.classList.remove('empty');
+      badge.classList.add('active');
+      badgeText.textContent = 'TAM BVF: Loaded ✓';
     }
 
     function buildContextMessage() {
