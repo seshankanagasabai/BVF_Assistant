@@ -1,6 +1,6 @@
 # BVF Assistant
 
-A Business Value Framework AI assistant that helps analyze business documents and articulate value propositions, outcomes, and KPIs using Google's Gemini API.
+A Business Value Framework AI assistant that helps analyse business documents and articulate value propositions, outcomes, and KPIs using Google's Gemini API.
 
 ## Features
 
@@ -67,7 +67,7 @@ A Business Value Framework AI assistant that helps analyze business documents an
 - Supports: Markdown, HTML, text OR PNG/JPG images
 - Tip: Export Google Docs as Markdown (File → Download → Markdown (.md))
 
-### Step 3: Analyze
+### Step 3: Analyse
 
 Use the quick action buttons or type your own questions:
 
